@@ -1,129 +1,456 @@
 # Enterprise AI Knowledge & Workflow Agent
 
-A production-oriented portfolio project for **supply-chain and procurement operations**. It combines enterprise policy retrieval, operational SQL analytics, deterministic supplier-risk logic and constrained agent orchestration behind a FastAPI API.
+> **Agentic AI system for supply-chain and procurement intelligence using RAG, natural-language SQL, LangGraph, deterministic risk scoring, and policy-grounded workflows.**
 
-## Business problem
+A production-oriented AI engineering project that combines **enterprise knowledge retrieval, operational analytics, supplier risk assessment, and agentic workflow orchestration** in a single application.
 
-Procurement teams often need to combine two evidence types: internal policies/SOPs and current operational data. A plain chatbot cannot reliably answer questions such as *"Which suppliers violate our SLA, and what action does policy require?"* This project routes each query to the right evidence source and exposes the tools and sources used.
+The system can answer questions that require both **structured operational data** and **unstructured enterprise policies**, while exposing the evidence, tools, and sources used to generate each response.
 
-## Key capabilities
+---
 
-- RAG over synthetic procurement, SLA, quality and inventory policies with source metadata
-- PostgreSQL operational model for suppliers, POs, performance, incidents, products and warehouses
-- Natural-language-to-SQL with SELECT-only validation, approved-table checks, row limits and timeouts
-- LangGraph routes: RAG / SQL / hybrid / supplier-risk / escalation report
-- Deterministic supplier risk score with explainable reasons
-- Grounded supplier escalation report with human-approval flag
-- FastAPI endpoints and minimal Streamlit client
-- Prompt-injection sanitization for retrieved documents
-- Pytest suite, evaluation set, Docker, Compose and GitHub Actions
+## What This Project Does
 
-## Architecture
+Procurement teams often need to answer questions that cannot be solved using only a database or only a chatbot.
 
-```text
-User
-  -> Streamlit
-  -> FastAPI
-  -> LangGraph router
-      -> RAG -> Chroma -> policy documents
-      -> SQL -> PostgreSQL
-      -> Supplier Risk -> deterministic Python
-      -> Report -> SQL + Risk + RAG
-  -> answer + sources + tools used + SQL evidence
-```
+For example:
 
-See [docs/architecture.md](docs/architecture.md).
+> **"Which suppliers are violating our delivery SLA, and what action should procurement take according to policy?"**
 
-## Example queries
+Answering this requires two different forms of reasoning:
 
-- `What action is required when a supplier repeatedly violates delivery SLA?`
-- `Which five suppliers had the lowest latest on-time delivery rate?`
-- `Which suppliers currently violate our SLA and what action should procurement take?`
-- `Assess risk score for SUP001.`
-- `Generate escalation report for SUP001.`
+1. Query operational supplier-performance data.
+2. Retrieve the relevant SLA and escalation policies.
+3. Combine both evidence sources.
+4. Recommend the appropriate workflow while preserving human approval for high-impact decisions.
 
-## Tech stack
+This project implements that workflow using a **LangGraph-based AI agent**.
 
-Python, FastAPI, PostgreSQL, SQLAlchemy, OpenAI-compatible LangChain client, Chroma, LangGraph, SQLGlot, Streamlit, Pytest, Docker, GitHub Actions.
+---
 
-## Repository structure
+## System Architecture
 
 ```text
-app/
-  agents/          # routing + LangGraph orchestration
-  api/             # FastAPI routes and schemas
-  core/            # settings, logging, security
-  database/        # SQLAlchemy schema/repository
-  llm/             # model provider boundary
-  prompts/         # concise prompts
-  rag/             # loading, chunking, embeddings, retrieval
-  tools/           # SQL, RAG, risk and report tools
-frontend/app.py
-data/documents/    # synthetic enterprise policies
-data/raw/          # generated synthetic operational CSVs
-scripts/           # data generation, DB seed, document indexing
-evaluation/        # labeled routing/evaluation set
-tests/
-docs/
+                         ┌─────────────────────┐
+                         │        User         │
+                         └──────────┬──────────┘
+                                    │
+                              Streamlit UI
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │       FastAPI       │
+                         └──────────┬──────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │  LangGraph Router   │
+                         └──────────┬──────────┘
+                                    │
+             ┌──────────────────────┼──────────────────────┐
+             │                      │                      │
+             ▼                      ▼                      ▼
+      ┌─────────────┐        ┌─────────────┐       ┌──────────────┐
+      │     RAG     │        │  SQL Agent  │       │ Supplier Risk│
+      │   Chroma    │        │ PostgreSQL  │       │ Deterministic│
+      └──────┬──────┘        └──────┬──────┘       └──────┬───────┘
+             │                      │                      │
+             └──────────────────────┼──────────────────────┘
+                                    │
+                                    ▼
+                         ┌─────────────────────┐
+                         │ Escalation Workflow │
+                         │ Evidence + Sources  │
+                         └─────────────────────┘
 ```
 
-## Local setup
+The router determines whether a query requires:
 
-### 1. Environment
+- **RAG** — enterprise policy/SOP retrieval
+- **SQL** — operational analytics
+- **Hybrid reasoning** — SQL + policy retrieval
+- **Supplier Risk** — deterministic risk assessment
+- **Escalation Report** — operational data + risk + policy evidence
+
+See [`docs/architecture.md`](docs/architecture.md) for the detailed design.
+
+---
+
+## Key Capabilities
+
+### Enterprise RAG
+
+Indexes synthetic procurement, supplier SLA, quality, escalation, and inventory policies.
+
+Retrieved evidence includes metadata such as:
+
+- document name
+- policy version
+- effective date
+- source file
+
+Retrieved documents are treated as **untrusted context** and sanitized before use.
+
+### Natural-Language SQL
+
+Converts business questions into operational SQL queries.
+
+The SQL execution layer includes:
+
+- SELECT-only validation
+- approved-table restrictions
+- row limits
+- query timeouts
+- SQL parsing with SQLGlot
+- read-only production design
+
+Example:
+
+```text
+Which five suppliers had the lowest on-time delivery rate?
+```
+
+### Hybrid SQL + RAG Reasoning
+
+Some questions require both operational and policy evidence.
+
+Example:
+
+```text
+Which suppliers violate our delivery SLA and what action
+should procurement take according to policy?
+```
+
+The agent retrieves supplier-performance data and relevant policy evidence before producing the response.
+
+### Deterministic Supplier Risk Engine
+
+Supplier risk is calculated using explicit business rules rather than allowing an LLM to invent risk scores.
+
+Example:
+
+```text
+Why is SUP001 considered high risk?
+```
+
+Risk explanations can include factors such as:
+
+- delivery performance
+- defect rate
+- fill rate
+- quality incidents
+
+This keeps risk assessment **reproducible and explainable**.
+
+### Supplier Escalation Workflow
+
+The system combines:
+
+```text
+Supplier Operational Data
+        +
+Risk Assessment
+        +
+Enterprise Policy Retrieval
+        ↓
+Grounded Escalation Report
+```
+
+High-impact actions such as supplier suspension remain subject to **human approval**.
+
+---
+
+## Evaluation
+
+The repository contains a curated evaluation suite covering routing, retrieval, and SQL safety.
+
+| Evaluation | Result |
+|---|---:|
+| Agent routing | **50/50 (100%)** |
+| Policy retrieval source hit@3 | **7/7 (100%)** |
+| Unsafe SQL rejection | **6/6 (100%)** |
+| Pytest suite | **21 tests passing** |
+
+Run the evaluation:
+
+```bash
+python evaluation/run_evaluation.py
+```
+
+Run the tests:
+
+```bash
+pytest -q
+```
+
+> These results are internal engineering checks on a synthetic environment, not external production benchmarks. No synthetic-data business impact is claimed.
+
+---
+
+## Example Queries
+
+### Policy / RAG
+
+```text
+What action should be taken when a supplier repeatedly violates its delivery SLA?
+```
+
+### Operational Analytics
+
+```text
+Which five suppliers had the lowest on-time delivery rate?
+```
+
+### Hybrid Reasoning
+
+```text
+Which suppliers violate our delivery SLA and what action should procurement take according to policy?
+```
+
+### Supplier Risk
+
+```text
+Assess risk score for SUP001.
+```
+
+### Workflow Generation
+
+```text
+Generate an escalation report for SUP001.
+```
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Language | Python |
+| Agent Orchestration | LangGraph |
+| LLM Integration | LangChain / OpenAI-compatible provider |
+| RAG | Chroma |
+| Database | PostgreSQL / SQLite development fallback |
+| ORM | SQLAlchemy |
+| SQL Safety | SQLGlot |
+| Backend | FastAPI |
+| Frontend | Streamlit |
+| Validation | Pydantic |
+| Testing | Pytest |
+| Containers | Docker / Docker Compose |
+| CI | GitHub Actions |
+
+---
+
+## Repository Structure
+
+```text
+enterprise-ai-agent/
+│
+├── app/
+│   ├── agents/          # LangGraph routing and orchestration
+│   ├── api/             # FastAPI routes and schemas
+│   ├── core/            # configuration, logging and security
+│   ├── database/        # SQLAlchemy models and repositories
+│   ├── llm/             # model-provider abstraction
+│   ├── prompts/         # system/tool prompts
+│   ├── rag/             # loading, chunking, embeddings, retrieval
+│   └── tools/           # SQL, RAG, risk and report tools
+│
+├── frontend/
+│   └── app.py           # Streamlit application
+│
+├── data/
+│   ├── documents/       # synthetic enterprise policies
+│   └── raw/             # synthetic operational datasets
+│
+├── evaluation/          # evaluation questions and results
+├── scripts/             # generation, seeding and indexing
+├── tests/               # automated tests
+├── docs/                # architecture and engineering docs
+│
+├── Dockerfile
+├── docker-compose.yml
+└── requirements.txt
+```
+
+---
+
+# Getting Started
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/Subhamnayak18/enterprise-ai-agent.git
+cd enterprise-ai-agent
+```
+
+## 2. Create a Virtual Environment
 
 ```bash
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-# macOS/Linux: source .venv/bin/activate
-pip install -r requirements-dev.txt
-cp .env.example .env   # Windows PowerShell: Copy-Item .env.example .env
 ```
 
-Add `OPENAI_API_KEY` to `.env` for LLM-generated SQL and synthesized RAG answers. The retrieval layer has an offline embedding fallback for development, but production-quality semantic retrieval should use the configured embedding API.
+Windows PowerShell:
 
-### 2. Start PostgreSQL
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+macOS/Linux:
+
+```bash
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Create the environment configuration:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+macOS/Linux:
+
+```bash
+cp .env.example .env
+```
+
+---
+
+## 3. Choose Database Mode
+
+### PostgreSQL
+
+The production-oriented configuration uses PostgreSQL.
 
 ```bash
 docker compose up -d db
 ```
 
-### 3. Generate and seed data
+Configure `DATABASE_URL` in `.env`.
+
+### Lightweight Local Development
+
+The application can also use SQLite for development without Docker:
+
+```env
+DATABASE_URL=sqlite:///./enterprise_ai.db
+```
+
+This is useful for quickly running and demonstrating the project locally.
+
+---
+
+## 4. Generate Synthetic Data
 
 ```bash
 python scripts/generate_data.py
 python scripts/seed_database.py
 ```
 
-The repository data is **synthetic** and is not copied from a real company.
+The generated dataset contains synthetic:
 
-### 4. Index policy documents
+- suppliers
+- products
+- warehouses
+- purchase orders
+- supplier-performance records
+- quality incidents
+
+**No proprietary company data is included.**
+
+---
+
+## 5. Index Enterprise Policies
 
 ```bash
 python scripts/index_documents.py
 ```
 
-### 5. Run API
+The RAG corpus includes synthetic policies covering areas such as:
+
+- supplier delivery SLA
+- supplier performance management
+- vendor escalation
+- quality incidents
+- procurement procedures
+- inventory replenishment
+- purchase-order approval
+
+---
+
+## 6. Run the Backend
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-API docs: `http://localhost:8000/docs`
+Swagger API documentation:
 
-### 6. Run UI
+```text
+http://localhost:8000/docs
+```
+
+---
+
+## 7. Run the Frontend
+
+Open another terminal:
 
 ```bash
 streamlit run frontend/app.py
 ```
 
-## API
+The application will normally be available at:
 
-- `GET /health`
-- `POST /chat`
-- `POST /documents/upload`
-- `POST /documents/index`
-- `GET /sources`
-- `GET /conversations/{conversation_id}`
+```text
+http://localhost:8501
+```
+
+---
+
+# LLM and Offline Development Modes
+
+The architecture supports an OpenAI-compatible LLM provider for:
+
+- synthesized RAG responses
+- model-generated SQL
+- higher-quality semantic embeddings
+
+Configure:
+
+```env
+OPENAI_API_KEY=your_key
+```
+
+The repository also contains deterministic/offline development fallbacks so the core architecture can be demonstrated without requiring a paid API.
+
+Offline mode supports:
+
+- deterministic query routing
+- local development embeddings
+- predefined SQL handling for supported analytical questions
+- deterministic supplier-risk assessment
+- policy evidence retrieval
+
+The local hashed embedding implementation is intentionally a **development fallback** and should not be presented as equivalent to production semantic embeddings.
+
+---
+
+# API Endpoints
+
+| Method | Endpoint | Purpose |
+|---|---|---|
+| `GET` | `/health` | Service health |
+| `POST` | `/chat` | Agent interaction |
+| `POST` | `/documents/upload` | Upload policy document |
+| `POST` | `/documents/index` | Re-index documents |
+| `GET` | `/sources` | Available knowledge sources |
+| `GET` | `/conversations/{conversation_id}` | Conversation history |
 
 Example:
 
@@ -133,51 +460,71 @@ curl -X POST http://localhost:8000/chat \
   -d '{"message":"Assess risk score for SUP001"}'
 ```
 
-## Evaluation
+---
 
-The evaluation set contains representative RAG, SQL, hybrid and business-tool questions. Run:
+# Security & Responsible AI
 
-```bash
-python evaluation/run_evaluation.py
-```
+The project deliberately separates probabilistic AI reasoning from deterministic business controls.
 
-Current included evaluation results:
+Key safeguards include:
 
-- deterministic routing accuracy: **100% on 50 curated questions**
-- policy retrieval source hit@3: **100% on 7 canonical checks**
-- unsafe SQL rejection: **100% on 6 safety checks**
+- SQL validation before execution
+- SELECT-only SQL
+- approved operational tables
+- configurable row limits
+- prompt-injection sanitization
+- environment-based secret management
+- source attribution for policy evidence
+- deterministic supplier-risk scoring
+- human approval for high-impact supplier actions
 
-These are internal project checks on a synthetic environment, not external benchmarks. Only measured results from `evaluation/results.json` should be used in a resume. Do not claim synthetic-data business impact.
+In production, the SQL agent should operate using **read-only database credentials**.
 
-## Security and design decisions
+See [`docs/responsible_ai.md`](docs/responsible_ai.md).
 
-- SQL is validated before execution and restricted to approved operational tables.
-- Agent SQL credentials should be read-only in production.
-- Retrieved document content is treated as untrusted data.
-- Secrets are environment variables and `.env` is excluded from Git.
-- Supplier suspension and similar high-impact actions require human approval.
+---
 
-See [docs/responsible_ai.md](docs/responsible_ai.md).
+# Testing
 
-## Testing
+Run:
 
 ```bash
 pytest -q
+```
+
+Static checks:
+
+```bash
 ruff check app scripts tests evaluation
 ```
 
-Tests focus on deterministic safety-critical behavior: SQL validation, routing, chunking, metadata, prompt-injection sanitization and supplier risk scoring.
+Tests focus particularly on deterministic and safety-critical behavior:
 
-## Docker
+- SQL validation
+- agent routing
+- document chunking
+- metadata preservation
+- prompt-injection sanitization
+- supplier-risk calculations
+
+---
+
+# Docker
+
+Run the complete stack:
 
 ```bash
 docker compose up --build
 ```
 
-API: `http://localhost:8000`
-UI: `http://localhost:8501`
+Services:
 
-Then generate/seed/index from the API container if needed:
+```text
+API       → http://localhost:8000
+Streamlit → http://localhost:8501
+```
+
+Initialize data from the API container when required:
 
 ```bash
 docker compose exec api python scripts/generate_data.py
@@ -185,22 +532,81 @@ docker compose exec api python scripts/seed_database.py
 docker compose exec api python scripts/index_documents.py
 ```
 
-## Deployment
+---
 
-A low-cost AWS path is documented in [docs/deployment.md](docs/deployment.md). For real enterprise use, add authentication/RBAC, private networking, durable document storage, managed vector search, observability and stricter governance.
+# Design Decisions
 
-## Limitations
+### Why LangGraph?
 
-- Synthetic data and policies do not establish real business impact.
-- LLM SQL generation can be incorrect even when syntactically safe.
-- Offline hashed embeddings are only a development fallback, not semantic production retrieval.
-- In-memory conversation history is not durable.
-- Upload indexing is synchronous and intended for a small demo corpus.
+The workflow contains multiple specialized tools and requires explicit routing between RAG, SQL, risk assessment, and reporting. A graph-based architecture makes these transitions visible and testable.
 
-## Future improvements
+### Why deterministic risk scoring?
 
-RBAC, conversation persistence, retrieval reranking, pgvector/managed vector search, asynchronous ingestion, SQL repair with bounded retries, tracing/observability and role-aware policy access.
+Risk scores can influence business decisions. Keeping the calculation outside the LLM makes the result reproducible, testable, and explainable.
 
-## Interview preparation
+### Why separate SQL and RAG?
 
-See [docs/interview_guide.md](docs/interview_guide.md) for the project story, architecture rationale and likely interview questions.
+Structured operational data and enterprise documents require different retrieval strategies. Separating them also makes hybrid questions explicit rather than hiding the reasoning inside one large prompt.
+
+### Why human approval?
+
+The system can recommend escalations but does not autonomously execute high-impact actions such as supplier suspension.
+
+---
+
+# Limitations
+
+- All operational data and enterprise policies are synthetic.
+- LLM-generated SQL may be incorrect even when syntactically safe.
+- Offline hashed embeddings are intended only for development.
+- Conversation history is currently stored in memory.
+- Document indexing is synchronous and designed for a small demonstration corpus.
+- The current project is a portfolio system, not a deployed enterprise application.
+
+---
+
+# Future Improvements
+
+Potential production extensions include:
+
+- authentication and RBAC
+- durable conversation persistence
+- hybrid retrieval and reranking
+- pgvector or managed vector search
+- asynchronous document ingestion
+- bounded SQL-repair loops
+- tracing and observability
+- role-aware policy access
+- managed cloud deployment
+- evaluation monitoring
+
+---
+
+# Documentation
+
+Additional documentation is available in:
+
+- [`docs/architecture.md`](docs/architecture.md) — system architecture
+- [`docs/deployment.md`](docs/deployment.md) — deployment approach
+- [`docs/responsible_ai.md`](docs/responsible_ai.md) — safety and governance
+- [`docs/interview_guide.md`](docs/interview_guide.md) — architecture rationale and interview preparation
+- [`docs/resume_bullets.md`](docs/resume_bullets.md) — measured project bullets
+
+---
+
+## Project Status
+
+**Functional portfolio implementation**
+
+Verified locally with:
+
+- FastAPI backend
+- Streamlit frontend
+- SQL analytics
+- deterministic supplier-risk assessment
+- RAG policy retrieval
+- hybrid SQL + policy workflow
+- escalation-report generation
+- automated tests
+
+The system is designed as a demonstration of **enterprise AI engineering patterns**, with emphasis on grounded responses, explainable business logic, safety controls, and modular architecture.
