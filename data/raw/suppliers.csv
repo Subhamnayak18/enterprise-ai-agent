@@ -1,0 +1,51 @@
+supplier_id,supplier_name,category,city,country,supplier_status,rating
+SUP001,Crown Industries 1,Cleaning,Jaipur,India,Active,4.6
+SUP002,Sunrise Trading 2,Packaging,Jaipur,India,Active,4.7
+SUP003,Metro Supplies 3,Maintenance,Bengaluru,India,Active,4.0
+SUP004,Prime Supplies 4,Packaging,Mumbai,India,Active,4.5
+SUP005,Apex Enterprises 5,Edible Oils,Jaipur,India,Active,4.4
+SUP006,Sapphire Trading 6,Maintenance,Delhi,India,Active,4.6
+SUP007,Shakti Industries 7,Maintenance,Hyderabad,India,Active,4.8
+SUP008,Green Supplies 8,Dairy Inputs,Hyderabad,India,Active,4.6
+SUP009,Prime Foods 9,Edible Oils,Ahmedabad,India,Active,4.3
+SUP010,Vertex Industries 10,Ingredients,Bengaluru,India,Active,3.9
+SUP011,Metro Enterprises 11,Dairy Inputs,Hyderabad,India,Active,4.8
+SUP012,Sunrise Trading 12,Dairy Inputs,Indore,India,Active,4.6
+SUP013,Green Trading 13,Edible Oils,Mumbai,India,Active,4.4
+SUP014,Sapphire Materials 14,Spices,Mumbai,India,Active,4.7
+SUP015,Sunrise Industries 15,Cleaning,Mumbai,India,Active,4.3
+SUP016,Nova Supplies 16,Edible Oils,Pune,India,Active,4.6
+SUP017,Nova Enterprises 17,Dairy Inputs,Jaipur,India,Active,4.3
+SUP018,Sunrise Industries 18,Spices,Delhi,India,Active,4.0
+SUP019,Shakti Foods 19,Packaging,Hyderabad,India,Active,4.4
+SUP020,Nova Trading 20,Maintenance,Pune,India,Active,4.8
+SUP021,Metro Materials 21,Ingredients,Jaipur,India,Active,3.9
+SUP022,Sapphire Enterprises 22,Dairy Inputs,Kolkata,India,Active,4.2
+SUP023,Metro Foods 23,Packaging,Mumbai,India,Active,4.8
+SUP024,Shakti Enterprises 24,Edible Oils,Hyderabad,India,Active,4.6
+SUP025,Blue Foods 25,Packaging,Mumbai,India,Active,4.6
+SUP026,Apex Enterprises 26,Cleaning,Mumbai,India,Active,4.5
+SUP027,Green Materials 27,Ingredients,Chennai,India,Active,4.3
+SUP028,Sunrise Industries 28,Packaging,Jaipur,India,Active,4.7
+SUP029,Prime Materials 29,Packaging,Pune,India,Active,4.7
+SUP030,Reliable Supplies 30,Edible Oils,Jaipur,India,Active,4.5
+SUP031,Apex Trading 31,Cleaning,Jaipur,India,Active,4.6
+SUP032,Sunrise Foods 32,Packaging,Jaipur,India,Active,4.6
+SUP033,Prime Materials 33,Packaging,Indore,India,Active,3.8
+SUP034,Metro Trading 34,Spices,Delhi,India,Active,4.0
+SUP035,Shakti Materials 35,Dairy Inputs,Mumbai,India,Active,4.5
+SUP036,Sunrise Foods 36,Spices,Chennai,India,Active,3.4
+SUP037,Shakti Foods 37,Edible Oils,Jaipur,India,Active,4.6
+SUP038,Shakti Enterprises 38,Packaging,Pune,India,Active,4.9
+SUP039,Vertex Foods 39,Cleaning,Chennai,India,Active,4.4
+SUP040,Apex Industries 40,Dairy Inputs,Pune,India,Active,4.1
+SUP041,Blue Trading 41,Packaging,Mumbai,India,Active,4.1
+SUP042,Green Materials 42,Ingredients,Bengaluru,India,Active,3.4
+SUP043,Vertex Foods 43,Cleaning,Hyderabad,India,Active,3.7
+SUP044,Metro Enterprises 44,Ingredients,Hyderabad,India,Active,4.3
+SUP045,Apex Foods 45,Cleaning,Delhi,India,Active,4.2
+SUP046,Prime Supplies 46,Ingredients,Mumbai,India,Active,4.3
+SUP047,Reliable Supplies 47,Dairy Inputs,Hyderabad,India,Active,4.3
+SUP048,Nova Supplies 48,Dairy Inputs,Jaipur,India,Active,4.2
+SUP049,Nova Supplies 49,Ingredients,Indore,India,Active,4.2
+SUP050,Metro Trading 50,Packaging,Ahmedabad,India,Active,3.6

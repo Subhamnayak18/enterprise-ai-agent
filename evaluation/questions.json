@@ -1,0 +1,252 @@
+[
+  {
+    "id": "RAG01",
+    "category": "rag",
+    "question": "What is the required response when OTD falls below 90%?"
+  },
+  {
+    "id": "RAG02",
+    "category": "rag",
+    "question": "When does a supplier move to Level 2 escalation?"
+  },
+  {
+    "id": "RAG03",
+    "category": "rag",
+    "question": "What approvals apply to a PO above INR 1,000,000?"
+  },
+  {
+    "id": "RAG04",
+    "category": "rag",
+    "question": "What should happen after a Critical quality incident?"
+  },
+  {
+    "id": "RAG05",
+    "category": "rag",
+    "question": "When can a supplier be removed from Watchlist?"
+  },
+  {
+    "id": "RAG06",
+    "category": "rag",
+    "question": "What is the OTD target for strategic suppliers?"
+  },
+  {
+    "id": "RAG07",
+    "category": "rag",
+    "question": "What does Level 1 escalation require?"
+  },
+  {
+    "id": "RAG08",
+    "category": "rag",
+    "question": "Who reviews a Level 3 escalation?"
+  },
+  {
+    "id": "RAG09",
+    "category": "rag",
+    "question": "When is competitive quotation required?"
+  },
+  {
+    "id": "RAG10",
+    "category": "rag",
+    "question": "Can the AI automatically suspend a supplier?"
+  },
+  {
+    "id": "RAG11",
+    "category": "rag",
+    "question": "What information should a requisition contain?"
+  },
+  {
+    "id": "RAG12",
+    "category": "rag",
+    "question": "What does closure of a quality incident require?"
+  },
+  {
+    "id": "RAG13",
+    "category": "rag",
+    "question": "When must a safety stock change be reviewed?"
+  },
+  {
+    "id": "RAG14",
+    "category": "rag",
+    "question": "What is required for a Watchlist supplier PO above INR 500,000?"
+  },
+  {
+    "id": "RAG15",
+    "category": "rag",
+    "question": "How are customer-caused delivery changes treated in SLA measurement?"
+  },
+  {
+    "id": "SQL01",
+    "category": "sql",
+    "question": "Which five suppliers have the lowest latest on-time delivery rate?"
+  },
+  {
+    "id": "SQL02",
+    "category": "sql",
+    "question": "How many suppliers are on Watchlist?"
+  },
+  {
+    "id": "SQL03",
+    "category": "sql",
+    "question": "Which suppliers have Critical quality incidents?"
+  },
+  {
+    "id": "SQL04",
+    "category": "sql",
+    "question": "What is the average fill rate by supplier category?"
+  },
+  {
+    "id": "SQL05",
+    "category": "sql",
+    "question": "Show the top 10 purchase orders by order value."
+  },
+  {
+    "id": "SQL06",
+    "category": "sql",
+    "question": "How many delayed purchase orders are there?"
+  },
+  {
+    "id": "SQL07",
+    "category": "sql",
+    "question": "Which warehouses received the highest order value?"
+  },
+  {
+    "id": "SQL08",
+    "category": "sql",
+    "question": "What is the average defect rate in the latest period?"
+  },
+  {
+    "id": "SQL09",
+    "category": "sql",
+    "question": "Which suppliers have the highest average delay days?"
+  },
+  {
+    "id": "SQL10",
+    "category": "sql",
+    "question": "How many open purchase orders exist?"
+  },
+  {
+    "id": "SQL11",
+    "category": "sql",
+    "question": "List suppliers with rating below 3.5."
+  },
+  {
+    "id": "SQL12",
+    "category": "sql",
+    "question": "Which product categories have the highest PO value?"
+  },
+  {
+    "id": "SQL13",
+    "category": "sql",
+    "question": "Count quality incidents by severity."
+  },
+  {
+    "id": "SQL14",
+    "category": "sql",
+    "question": "Which suppliers have OTD below 90% in the latest period?"
+  },
+  {
+    "id": "SQL15",
+    "category": "sql",
+    "question": "What is the total purchase order value by month?"
+  },
+  {
+    "id": "HYB01",
+    "category": "both",
+    "question": "Which suppliers currently violate our delivery SLA and what action should procurement take?"
+  },
+  {
+    "id": "HYB02",
+    "category": "both",
+    "question": "Which Watchlist suppliers have high-value orders and what approval applies?"
+  },
+  {
+    "id": "HYB03",
+    "category": "both",
+    "question": "Which suppliers with Critical incidents have open POs and what policy action is required?"
+  },
+  {
+    "id": "HYB04",
+    "category": "both",
+    "question": "Find suppliers below 90% OTD and explain the escalation rule."
+  },
+  {
+    "id": "HYB05",
+    "category": "both",
+    "question": "Which suppliers have repeated delivery problems and what recovery process applies?"
+  },
+  {
+    "id": "HYB06",
+    "category": "both",
+    "question": "Which poor-fill-rate suppliers should procurement review according to policy?"
+  },
+  {
+    "id": "HYB07",
+    "category": "both",
+    "question": "Which risky suppliers have large current commitments and what human review is required?"
+  },
+  {
+    "id": "HYB08",
+    "category": "both",
+    "question": "Which suppliers have severe incidents and what containment rules apply?"
+  },
+  {
+    "id": "HYB09",
+    "category": "both",
+    "question": "Which delayed suppliers also have quality issues and what escalation level could apply?"
+  },
+  {
+    "id": "HYB10",
+    "category": "both",
+    "question": "Identify suppliers with high defect rates and summarize the applicable quality process."
+  },
+  {
+    "id": "BUS01",
+    "category": "business",
+    "question": "Assess risk for SUP001"
+  },
+  {
+    "id": "BUS02",
+    "category": "business",
+    "question": "What is the risk score for SUP005?"
+  },
+  {
+    "id": "BUS03",
+    "category": "business",
+    "question": "Why is SUP010 considered high risk?"
+  },
+  {
+    "id": "BUS04",
+    "category": "business",
+    "question": "Assess risk level for SUP015"
+  },
+  {
+    "id": "BUS05",
+    "category": "business",
+    "question": "Give deterministic supplier risk for SUP020"
+  },
+  {
+    "id": "BUS06",
+    "category": "business",
+    "question": "What is SUP025 risk level?"
+  },
+  {
+    "id": "BUS07",
+    "category": "business",
+    "question": "Assess supplier risk SUP030"
+  },
+  {
+    "id": "BUS08",
+    "category": "business",
+    "question": "Risk score for SUP035"
+  },
+  {
+    "id": "BUS09",
+    "category": "business",
+    "question": "Why is SUP040 high risk?"
+  },
+  {
+    "id": "BUS10",
+    "category": "business",
+    "question": "Assess risk for SUP045"
+  }
+]

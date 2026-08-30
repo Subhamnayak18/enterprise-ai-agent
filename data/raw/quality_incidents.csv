@@ -1,0 +1,50 @@
+incident_id,supplier_id,incident_date,severity,category,description,resolution_status
+QI0001,SUP002,2026-01-16,Low,Short Supply,Low supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0002,SUP003,2025-08-10,Low,Packaging Damage,Low supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0003,SUP005,2025-11-27,High,Labelling,High supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0004,SUP008,2026-07-18,Low,Contamination,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0005,SUP010,2026-06-30,Medium,Specification Deviation,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0006,SUP010,2025-08-19,Low,Labelling,Low supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0007,SUP013,2025-11-07,Low,Labelling,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0008,SUP013,2026-03-27,Medium,Short Supply,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0009,SUP015,2025-10-20,High,Labelling,High supplier quality deviation identified during receiving inspection.,Closed
+QI0010,SUP017,2025-11-21,High,Contamination,High supplier quality deviation identified during receiving inspection.,Closed
+QI0011,SUP018,2026-03-31,Medium,Specification Deviation,Medium supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0012,SUP019,2026-01-07,Medium,Contamination,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0013,SUP021,2025-11-19,Low,Short Supply,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0014,SUP022,2025-09-01,Critical,Packaging Damage,Critical supplier quality deviation identified during receiving inspection.,Closed
+QI0015,SUP022,2025-10-20,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0016,SUP023,2026-02-27,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0017,SUP024,2025-12-11,Medium,Specification Deviation,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0018,SUP025,2025-10-19,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0019,SUP026,2026-01-27,Medium,Short Supply,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0020,SUP027,2025-09-11,Low,Specification Deviation,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0021,SUP030,2025-11-22,High,Contamination,High supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0022,SUP033,2026-01-12,Low,Contamination,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0023,SUP033,2026-02-09,High,Packaging Damage,High supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0024,SUP034,2025-09-11,Low,Labelling,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0025,SUP034,2025-12-10,High,Labelling,High supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0026,SUP035,2026-07-08,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0027,SUP036,2025-11-27,High,Labelling,High supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0028,SUP036,2025-08-12,Critical,Labelling,Critical supplier quality deviation identified during receiving inspection.,Closed
+QI0029,SUP036,2026-06-09,High,Short Supply,High supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0030,SUP036,2026-02-18,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0031,SUP040,2026-02-07,Low,Specification Deviation,Low supplier quality deviation identified during receiving inspection.,Closed
+QI0032,SUP041,2025-11-12,Medium,Specification Deviation,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0033,SUP041,2026-02-22,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0034,SUP042,2025-09-16,Low,Specification Deviation,Low supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0035,SUP042,2026-05-26,Critical,Contamination,Critical supplier quality deviation identified during receiving inspection.,Closed
+QI0036,SUP042,2026-02-17,Medium,Packaging Damage,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0037,SUP042,2025-10-07,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0038,SUP043,2025-11-01,High,Specification Deviation,High supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0039,SUP043,2026-07-26,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Closed
+QI0040,SUP045,2026-03-18,Low,Contamination,Low supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0041,SUP046,2026-05-19,Medium,Packaging Damage,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0042,SUP047,2025-12-13,Low,Packaging Damage,Low supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0043,SUP048,2025-10-18,Medium,Contamination,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0044,SUP048,2026-04-02,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open
+QI0045,SUP048,2026-03-07,High,Packaging Damage,High supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0046,SUP050,2026-02-22,Critical,Labelling,Critical supplier quality deviation identified during receiving inspection.,Closed
+QI0047,SUP050,2026-04-20,Medium,Labelling,Medium supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0048,SUP050,2025-12-18,High,Contamination,High supplier quality deviation identified during receiving inspection.,Under Investigation
+QI0049,SUP050,2025-09-04,Medium,Specification Deviation,Medium supplier quality deviation identified during receiving inspection.,Corrective Action Open

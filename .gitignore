@@ -1,0 +1,17 @@
+.env
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.DS_Store
+.idea/
+.vscode/
+*.db
+*.sqlite3
+data/processed/chroma/
+data/documents/uploads/*
+!data/documents/uploads/.gitkeep

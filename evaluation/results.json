@@ -1,0 +1,10 @@
+{
+  "routing_questions": 50,
+  "routing_accuracy": 1.0,
+  "avg_deterministic_router_latency_ms": 0.004,
+  "retrieval_checks": 7,
+  "retrieval_source_hit_at_3": 1.0,
+  "unsafe_sql_checks": 6,
+  "unsafe_sql_rejection_rate": 1.0,
+  "notes": "Measured on the included synthetic policy/data project environment. Routing set is curated and not an external benchmark."
+}
